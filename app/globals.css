@@ -44,29 +44,19 @@
   background: #7878a3;
 }
 @theme {
+  --text-10:10px;
+  --text-12:12px;
+  --text-14: 14px; /* Defines the '16' utility for text */
   --text-16: 16px; /* Defines the '16' utility for text */
+  --text-18: 18px; /* Defines the '16' utility for text */
+  --text-20: 20px;
+  --text-24:24px;
+  --text-26:26px;
+  --text-30:30px;
+  --text-36: 36px;
 }
 
 @layer utilities {
-  .input-class {
-    @apply text-16 placeholder:text-16 rounded-lg border border-gray-300 text-gray-500 placeholder:text-gray-500;
-  }
-
-  .sheet-content button {
-    @apply focus:ring-0 focus-visible:ring-transparent focus:ring-offset-0 focus-visible:ring-offset-0 focus-visible:outline-none focus-visible:border-none ; /*!important*/
-  }
-
-  .text14_padding10 {
-    @apply text-14 px-4 py-2.5 font-semibold;
-  }
-
-  .flex-center {
-    @apply flex items-center justify-center;
-  }
-
-  .header-2 {
-    @apply text-18 font-semibold text-gray-900;
-  }
 
   .text-10 {
     @apply text-[10px] leading-[14px];
@@ -108,13 +98,38 @@
     @apply text-[36px] leading-[44px];
   }
 
+  .input-class {
+    @apply text-16 placeholder:text-16 rounded-lg border border-gray-300 text-gray-500 placeholder:text-gray-500;
+  }
+
+  .sheet-content button {
+    @apply focus:ring-0 focus-visible:ring-transparent focus:ring-offset-0 focus-visible:ring-offset-0 focus-visible:outline-none focus-visible:border-none ; /*!important*/
+  }
+
+  .text14_padding10 {
+    @apply text-14 px-4 py-2.5 font-semibold;
+  }
+
+  .flex-center {
+    @apply flex items-center justify-center;
+  }
+
+  .header-2 {
+    @apply text-18 font-semibold text-gray-900;
+  }
+
+  .no-scrollbar{
+    -ms-overflow-style: none; /* IE and Edge */
+      scrollbar-width: none; /* Firefox */
+  }
+
   /* Home */
   .home {
-    @apply no-scrollbar flex w-full flex-row max-xl:max-h-screen max-xl:overflow-y-scroll;
+    @apply flex w-full flex-row max-xl:max-h-screen max-xl:overflow-y-scroll; /*no-scrollbar*/
   }
 
   .home-content {
-    @apply no-scrollbar flex w-full flex-1 flex-col gap-8 px-5 sm:px-8 py-7 lg:py-12 xl:max-h-screen xl:overflow-y-scroll;
+    @apply flex w-full flex-1 flex-col gap-8 px-5 sm:px-8 py-7 lg:py-12 xl:max-h-screen xl:overflow-y-scroll; /*no-scrollbar*/
   }
 
   .home-header {
@@ -154,12 +169,12 @@
   }
 
   .recent-transactions-tablist {
-    @apply custom-scrollbar mb-8 flex w-full flex-nowrap;
+    @apply mb-8 flex w-full flex-nowrap; /*custom-scrollbar*/
   }
 
   /* Right sidebar */
   .right-sidebar {
-    @apply no-scrollbar hidden h-screen max-h-screen flex-col border-l border-gray-200 xl:flex min-w-[300px] 2xl:min-w-[355px] xl:overflow-y-scroll; /* !important*/
+    @apply  hidden h-screen max-h-screen flex-col border-l border-gray-200 xl:flex min-w-[300px] 2xl:min-w-[355px] xl:overflow-y-scroll; /*no-scrollbar !important*/
   }
 
   .profile-banner {
@@ -171,7 +186,7 @@
   }
 
   .profile-img {
-    @apply flex-center absolute -top-8 size-24 rounded-full bg-gray-100 border-8 border-white p-2 shadow-profile;
+    @apply  absolute -top-8 size-24 rounded-full bg-gray-100 border-8 border-white p-2 shadow-profile; /*flex-center*/
   }
 
   .profile-details {
@@ -209,7 +224,7 @@
   }
 
   .transactions-account-balance {
-    @apply flex-center flex-col  gap-2 rounded-md bg-blue-25/20 px-4 py-2 text-white;
+    @apply flex-col  gap-2 rounded-md bg-blue-25/20 px-4 py-2 text-white; /*flex-center*/
   }
 
   .header-box {
@@ -244,7 +259,7 @@
 
   /* Category Badge */
   .category-badge {
-    @apply flex-center truncate w-fit gap-1 rounded-2xl border-[1.5px] py-[2px] pl-1.5 pr-2;
+    @apply truncate w-fit gap-1 rounded-2xl border-[1.5px] py-[2px] pl-1.5 pr-2; /*flex-center*/
   }
 
   .banktab-item {
@@ -305,7 +320,7 @@
 
   /* Payment Transfer */
   .payment-transfer {
-    @apply no-scrollbar flex flex-col overflow-y-scroll bg-gray-25 p-8 md:max-h-screen xl:py-12;
+    @apply  flex flex-col overflow-y-scroll bg-gray-25 p-8 md:max-h-screen xl:py-12; /*no-scrollbar*/
   }
 
   .payment-transfer_form-item {
