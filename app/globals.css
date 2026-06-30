@@ -1,6 +1,7 @@
 @import "tailwindcss";
 @import "tailwindcss/preflight";
 @tailwind utilities;
+@config "../tailwind.config.ts";
 
 * {
   margin: 0;
@@ -42,6 +43,9 @@
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
   background: #7878a3;
 }
+@theme {
+  --text-16: 16px; /* Defines the '16' utility for text */
+}
 
 @layer utilities {
   .input-class {
@@ -49,7 +53,7 @@
   }
 
   .sheet-content button {
-    @apply focus:ring-0 focus-visible:ring-transparent focus:ring-offset-0 focus-visible:ring-offset-0 focus-visible:outline-none focus-visible:border-none !important;
+    @apply focus:ring-0 focus-visible:ring-transparent focus:ring-offset-0 focus-visible:ring-offset-0 focus-visible:outline-none focus-visible:border-none ; /*!important*/
   }
 
   .text14_padding10 {
@@ -155,7 +159,7 @@
 
   /* Right sidebar */
   .right-sidebar {
-    @apply no-scrollbar hidden h-screen max-h-screen flex-col border-l border-gray-200 xl:flex min-w-[300px] 2xl:min-w-[355px] xl:overflow-y-scroll !important;
+    @apply no-scrollbar hidden h-screen max-h-screen flex-col border-l border-gray-200 xl:flex min-w-[300px] 2xl:min-w-[355px] xl:overflow-y-scroll; /* !important*/
   }
 
   .profile-banner {
@@ -321,7 +325,7 @@
   }
 
   .payment-transfer_btn {
-    @apply text-14 w-full bg-bank-gradient font-semibold text-white shadow-form !important;
+    @apply text-14 w-full bg-bank-gradient font-semibold text-white shadow-form; /* !important*/
   }
 
   /* Root Layout */
