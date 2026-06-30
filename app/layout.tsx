@@ -1,15 +1,25 @@
-import { Geist, Geist_Mono } from "next/font/google"
+import { IBM_Plex_Serif, Inter } from "next/font/google"
 
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
 import { cn } from "@/lib/utils";
+import { Metadata } from "next";
 
-const geist = Geist({subsets:['latin'],variable:'--font-sans'})
+const inter = Inter({subsets:['latin'],variable:'--font-inter'})
 
-const fontMono = Geist_Mono({
+const imbPlexSerif = IBM_Plex_Serif({
   subsets: ["latin"],
-  variable: "--font-mono",
+  weight:['400','700'],
+  variable: "--font-ibm-plex-serif",
 })
+
+export const metadata:Metadata = {
+  title:"Future",
+  icons:{
+    icon:"/public/icons/logo.svg"
+  },
+  description:"Future is a next-generetaion online banking platform that revolutionizes the way banking systems work."
+}
 
 export default function RootLayout({
   children,
@@ -20,7 +30,7 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={cn("antialiased", fontMono.variable, "font-sans", geist.variable)}
+      className={cn("antialiased", imbPlexSerif.variable, "font-sans", inter.variable)}
     >
       <body>
         <ThemeProvider>{children}</ThemeProvider>
