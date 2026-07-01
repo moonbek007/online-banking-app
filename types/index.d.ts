@@ -137,6 +137,10 @@ declare type NewDwollaCustomerParams = {
   ssn: string;
 };
 
+declare interface AnimatedCounterProps {
+  amount: number;
+}
+
 declare interface CreditCardProps {
   account: Account;
   userName: string;
