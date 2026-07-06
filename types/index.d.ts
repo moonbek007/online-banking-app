@@ -6,6 +6,24 @@ declare type SearchParamProps = {
 }
 
 // ========================================
+declare type AuthFormProps = {
+  type: string
+}
+
+declare enum AuthFormType {
+  SIGN_IN = "sign-in",
+  SIGN_up = "sign-up",
+}
+
+declare enum CustomInputLabels {
+  EMAIL = "email",
+  PASSWORD = "password",
+}
+
+declare type CustomInputComponentProps = {
+  form: import("react-hook-form").UseFormReturn
+  label: string
+}
 
 declare type SignUpParams = {
   firstName: string
