@@ -13,23 +13,42 @@ import { Button } from "@/components/ui/button"
 
 import formSchema from "@/lib/formSchema"
 import { Loader2 } from "lucide-react"
+import { useRouter } from "next/navigation"
+import { signIn, signUp } from "@/lib/actions/user.actions"
 
 const AuthForm = ({ type }: AuthFormProps) => {
+  const router = useRouter()
   const [user, setUser] = useState(null)
   const [isLoading, setIsLoading] = useState(false)
 
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const schema = formSchema(type)
+  const form = useForm<z.infer<typeof schema>>({
+    resolver: zodResolver(schema),
     defaultValues: {
       email: "",
       password: "",
     },
   })
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
+  const onSubmit = async (data: z.infer<typeof formSchema>) => {
     setIsLoading(true)
-    console.log(values)
-    setIsLoading(false)
+    try {
+      //Sign up with Appwrite & create plaid token
+      if (type === AuthFormType.SIGN_up) {
+        const newUser = await signUp(data)
+        setUser(newUser)
+      } else if (type === AuthFormType.SIGN_IN) {
+        const response = await signIn({
+          email: data.email,
+          password: data.password,
+        })
+        if (response) router.push("/")
+      }
+    } catch (error) {
+      console.log(error)
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   return (
@@ -66,6 +85,57 @@ const AuthForm = ({ type }: AuthFormProps) => {
       ) : (
         <form id="form-rhf-input" onSubmit={form.handleSubmit(onSubmit)}>
           <FieldGroup>
+            {type === AuthFormType.SIGN_up && (
+              <>
+                <div className="flex gap-4">
+                  <CustomInputComponent
+                    key={CustomInputLabels.FIRST_NAME}
+                    label={CustomInputLabels.FIRST_NAME}
+                    form={form}
+                  />
+                  <CustomInputComponent
+                    key={CustomInputLabels.LAST_NAME}
+                    label={CustomInputLabels.LAST_NAME}
+                    form={form}
+                  />
+                </div>
+                <CustomInputComponent
+                  key={CustomInputLabels.ADDRESS}
+                  label={CustomInputLabels.ADDRESS}
+                  form={form}
+                />
+                <CustomInputComponent
+                  key={CustomInputLabels.CITY}
+                  label={CustomInputLabels.CITY}
+                  form={form}
+                />
+                <div className="flex gap-4">
+                  <CustomInputComponent
+                    key={CustomInputLabels.STATE}
+                    label={CustomInputLabels.State}
+                    form={form}
+                  />
+                  <CustomInputComponent
+                    key={CustomInputLabels.POSTAL_CODE}
+                    label={CustomInputLabels.POSTAL_CODE}
+                    form={form}
+                  />
+                </div>
+                <div className="flex gap-4">
+                  <CustomInputComponent
+                    key={CustomInputLabels.DATE_OF_BIRTH}
+                    label={CustomInputLabels.DATE_OF_BIRTH}
+                    form={form}
+                  />
+                  <CustomInputComponent
+                    key={CustomInputLabels.SSN}
+                    label={CustomInputLabels.SSN}
+                    form={form}
+                  />
+                </div>
+              </>
+            )}
+
             <CustomInputComponent
               key={CustomInputLabels.EMAIL}
               label={CustomInputLabels.EMAIL}
