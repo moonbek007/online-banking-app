@@ -6,18 +6,27 @@ declare type SearchParamProps = {
 }
 
 // ========================================
-declare type AuthFormProps = {
-  type: string
-}
 
 declare enum AuthFormType {
   SIGN_IN = "sign-in",
   SIGN_up = "sign-up",
 }
 
+declare type AuthFormProps = {
+  type: AuthFormType
+}
+
 declare enum CustomInputLabels {
   EMAIL = "email",
   PASSWORD = "password",
+  FIRST_NAME = "first name",
+  LAST_NAME = "last name",
+  ADDRESS = "address",
+  CITY = "city",
+  STATE = "state",
+  POSTAL_CODE = "postal code",
+  DATE_OF_BIRTH = "date of birth",
+  SSN = "ssn",
 }
 
 declare type CustomInputComponentProps = {
