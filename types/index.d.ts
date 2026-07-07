@@ -16,6 +16,11 @@ declare type AuthFormProps = {
   type: AuthFormType
 }
 
+declare enum InputType {
+  EMAIL = "email",
+  PASSWORD = "password",
+}
+
 declare enum CustomInputLabels {
   EMAIL = "email",
   PASSWORD = "password",
@@ -29,9 +34,35 @@ declare enum CustomInputLabels {
   SSN = "ssn",
 }
 
+declare enum FormFieldNames {
+  firstName = "firstName",
+  lastName = "lastName",
+  address1 = "address1",
+  city = "city",
+  state = "state",
+  postalCode = "postalCode",
+  dateOfBirth = "dateOfBirth",
+  ssn = "ssn",
+  email = "email",
+  password = "password",
+}
+
 declare type CustomInputComponentProps = {
-  form: import("react-hook-form").UseFormReturn
-  label: string
+  form: import("react-hook-form").UseFormReturn<{
+    firstName: string | undefined
+    lastName: string | undefined
+    address1: string | undefined
+    city: string | undefined
+    state: string | undefined
+    postalCode: string | undefined
+    dateOfBirth: string | undefined
+    ssn: string | undefined
+    email: string
+    password: string
+  }>
+  type?: string
+  label: FormFieldNames | CustomInputLabels
+  placeholder: string
 }
 
 declare type SignUpParams = {
@@ -221,6 +252,7 @@ declare interface AuthFormProps {
 
 declare interface BankDropdownProps {
   accounts: Account[]
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   setValue?: UseFormSetValue<any>
   otherStyles?: string
 }

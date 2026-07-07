@@ -18,7 +18,7 @@ import { signIn, signUp } from "@/lib/actions/user.actions"
 
 const AuthForm = ({ type }: AuthFormProps) => {
   const router = useRouter()
-  const [user, setUser] = useState(null)
+  const [user, setUser] = useState<SignUpParams | LoginUser | null>(null)
   const [isLoading, setIsLoading] = useState(false)
 
   const schema = formSchema(type)
@@ -30,13 +30,13 @@ const AuthForm = ({ type }: AuthFormProps) => {
     },
   })
 
-  const onSubmit = async (data: z.infer<typeof formSchema>) => {
+  const onSubmit = async (data: z.infer<typeof schema>) => {
     setIsLoading(true)
     try {
       //Sign up with Appwrite & create plaid token
       if (type === AuthFormType.SIGN_up) {
-        const newUser = await signUp(data)
-        setUser(newUser)
+        const newUser = await signUp(data as SignUpParams)
+        setUser(newUser!)
       } else if (type === AuthFormType.SIGN_IN) {
         const response = await signIn({
           email: data.email,
@@ -91,33 +91,39 @@ const AuthForm = ({ type }: AuthFormProps) => {
                   <CustomInputComponent
                     key={CustomInputLabels.FIRST_NAME}
                     label={CustomInputLabels.FIRST_NAME}
+                    placeholder="Enter your first name"
                     form={form}
                   />
                   <CustomInputComponent
                     key={CustomInputLabels.LAST_NAME}
                     label={CustomInputLabels.LAST_NAME}
+                    placeholder="Enter your last name"
                     form={form}
                   />
                 </div>
                 <CustomInputComponent
                   key={CustomInputLabels.ADDRESS}
                   label={CustomInputLabels.ADDRESS}
+                  placeholder="Enter your address"
                   form={form}
                 />
                 <CustomInputComponent
                   key={CustomInputLabels.CITY}
                   label={CustomInputLabels.CITY}
+                  placeholder="Enter your city"
                   form={form}
                 />
                 <div className="flex gap-4">
                   <CustomInputComponent
                     key={CustomInputLabels.STATE}
-                    label={CustomInputLabels.State}
+                    label={CustomInputLabels.STATE}
+                    placeholder="Example: NY"
                     form={form}
                   />
                   <CustomInputComponent
                     key={CustomInputLabels.POSTAL_CODE}
                     label={CustomInputLabels.POSTAL_CODE}
+                    placeholder="Example, 160100"
                     form={form}
                   />
                 </div>
@@ -125,12 +131,14 @@ const AuthForm = ({ type }: AuthFormProps) => {
                   <CustomInputComponent
                     key={CustomInputLabels.DATE_OF_BIRTH}
                     label={CustomInputLabels.DATE_OF_BIRTH}
+                    placeholder="DD/MM/YYYY"
                     form={form}
                   />
                   <CustomInputComponent
                     key={CustomInputLabels.SSN}
                     label={CustomInputLabels.SSN}
                     form={form}
+                    placeholder="Enter your SSN"
                   />
                 </div>
               </>
@@ -139,11 +147,15 @@ const AuthForm = ({ type }: AuthFormProps) => {
             <CustomInputComponent
               key={CustomInputLabels.EMAIL}
               label={CustomInputLabels.EMAIL}
+              placeholder="Enter your email"
+              type={InputType.EMAIL}
               form={form}
             />
             <CustomInputComponent
               key={CustomInputLabels.PASSWORD}
               label={CustomInputLabels.PASSWORD}
+              placeholder="Enter your password"
+              type={InputType.PASSWORD}
               form={form}
             />
           </FieldGroup>

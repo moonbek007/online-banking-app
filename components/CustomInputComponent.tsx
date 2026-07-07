@@ -2,10 +2,15 @@ import { Field, FieldError, FieldLabel } from "@/components/ui/field"
 import { Controller } from "react-hook-form"
 import { Input } from "@/components/ui/input"
 
-const CustomInputComponent = ({ form, label }: CustomInputComponentProps) => {
+const CustomInputComponent = ({
+  form,
+  label,
+  placeholder,
+  type = "text",
+}: CustomInputComponentProps) => {
   return (
     <Controller
-      name={label}
+      name={label as FormFieldNames}
       control={form.control}
       render={({ field, fieldState }) => (
         <Field data-invalid={fieldState.invalid} className="form-item">
@@ -15,10 +20,10 @@ const CustomInputComponent = ({ form, label }: CustomInputComponentProps) => {
           <div className="flex w-full">
             <Input
               {...field}
-              type={label}
+              type={type}
               id={field.name}
               aria-invalid={fieldState.invalid}
-              placeholder={`Enter your ${label}`}
+              placeholder={placeholder}
               className="input-class"
             />
           </div>
