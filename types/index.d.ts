@@ -47,6 +47,11 @@ declare enum FormFieldNames {
   password = "password",
 }
 
+declare enum FooterType {
+  MOBILE = "mobile",
+  DESKTOP = "desktop",
+}
+
 declare type CustomInputComponentProps = {
   form: import("react-hook-form").UseFormReturn<{
     firstName: string | undefined
@@ -270,7 +275,7 @@ declare interface TotalBalanceBoxProps {
 
 declare interface FooterProps {
   user: User
-  type?: "mobile" | "desktop"
+  type?: FooterType
 }
 
 declare interface RightSidebarProps {
