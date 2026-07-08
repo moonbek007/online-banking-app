@@ -15,6 +15,7 @@ import formSchema from "@/lib/formSchema"
 import { Loader2 } from "lucide-react"
 import { useRouter } from "next/navigation"
 import { signIn, signUp } from "@/lib/actions/user.actions"
+import PlaidLink from "./PlaidLink"
 
 const AuthForm = ({ type }: AuthFormProps) => {
   const router = useRouter()
@@ -80,102 +81,103 @@ const AuthForm = ({ type }: AuthFormProps) => {
           </p>
         </div>
       </header>
-      {user ? (
-        <div className="flex flex-col gap-4">{/* PlaidLink */}</div>
-      ) : (
-        <form id="form-rhf-input" onSubmit={form.handleSubmit(onSubmit)}>
-          <FieldGroup>
-            {type === AuthFormType.SIGN_up && (
-              <>
-                <div className="flex gap-4">
-                  <CustomInputComponent
-                    key={CustomInputLabels.FIRST_NAME}
-                    label={CustomInputLabels.FIRST_NAME}
-                    placeholder="Enter your first name"
-                    form={form}
-                  />
-                  <CustomInputComponent
-                    key={CustomInputLabels.LAST_NAME}
-                    label={CustomInputLabels.LAST_NAME}
-                    placeholder="Enter your last name"
-                    form={form}
-                  />
-                </div>
+      {/* {user ? (
+        <div className="flex flex-col gap-4">
+          <PlaidLink user={user} variant="primary" />
+        </div>
+      ) : ( */}
+      <form id="form-rhf-input" onSubmit={form.handleSubmit(onSubmit)}>
+        <FieldGroup>
+          {type === AuthFormType.SIGN_up && (
+            <>
+              <div className="flex gap-4">
                 <CustomInputComponent
-                  key={CustomInputLabels.ADDRESS}
-                  label={CustomInputLabels.ADDRESS}
-                  placeholder="Enter your address"
+                  key={CustomInputLabels.FIRST_NAME}
+                  label={CustomInputLabels.FIRST_NAME}
+                  placeholder="Enter your first name"
                   form={form}
                 />
                 <CustomInputComponent
-                  key={CustomInputLabels.CITY}
-                  label={CustomInputLabels.CITY}
-                  placeholder="Enter your city"
+                  key={CustomInputLabels.LAST_NAME}
+                  label={CustomInputLabels.LAST_NAME}
+                  placeholder="Enter your last name"
                   form={form}
                 />
-                <div className="flex gap-4">
-                  <CustomInputComponent
-                    key={CustomInputLabels.STATE}
-                    label={CustomInputLabels.STATE}
-                    placeholder="Example: NY"
-                    form={form}
-                  />
-                  <CustomInputComponent
-                    key={CustomInputLabels.POSTAL_CODE}
-                    label={CustomInputLabels.POSTAL_CODE}
-                    placeholder="Example, 160100"
-                    form={form}
-                  />
-                </div>
-                <div className="flex gap-4">
-                  <CustomInputComponent
-                    key={CustomInputLabels.DATE_OF_BIRTH}
-                    label={CustomInputLabels.DATE_OF_BIRTH}
-                    placeholder="DD/MM/YYYY"
-                    form={form}
-                  />
-                  <CustomInputComponent
-                    key={CustomInputLabels.SSN}
-                    label={CustomInputLabels.SSN}
-                    form={form}
-                    placeholder="Enter your SSN"
-                  />
-                </div>
-              </>
-            )}
+              </div>
+              <CustomInputComponent
+                key={CustomInputLabels.ADDRESS}
+                label={CustomInputLabels.ADDRESS}
+                placeholder="Enter your address"
+                form={form}
+              />
+              <CustomInputComponent
+                key={CustomInputLabels.CITY}
+                label={CustomInputLabels.CITY}
+                placeholder="Enter your city"
+                form={form}
+              />
+              <div className="flex gap-4">
+                <CustomInputComponent
+                  key={CustomInputLabels.STATE}
+                  label={CustomInputLabels.STATE}
+                  placeholder="Example: NY"
+                  form={form}
+                />
+                <CustomInputComponent
+                  key={CustomInputLabels.POSTAL_CODE}
+                  label={CustomInputLabels.POSTAL_CODE}
+                  placeholder="Example, 160100"
+                  form={form}
+                />
+              </div>
+              <div className="flex gap-4">
+                <CustomInputComponent
+                  key={CustomInputLabels.DATE_OF_BIRTH}
+                  label={CustomInputLabels.DATE_OF_BIRTH}
+                  placeholder="DD/MM/YYYY"
+                  form={form}
+                />
+                <CustomInputComponent
+                  key={CustomInputLabels.SSN}
+                  label={CustomInputLabels.SSN}
+                  form={form}
+                  placeholder="Enter your SSN"
+                />
+              </div>
+            </>
+          )}
 
-            <CustomInputComponent
-              key={CustomInputLabels.EMAIL}
-              label={CustomInputLabels.EMAIL}
-              placeholder="Enter your email"
-              type={InputType.EMAIL}
-              form={form}
-            />
-            <CustomInputComponent
-              key={CustomInputLabels.PASSWORD}
-              label={CustomInputLabels.PASSWORD}
-              placeholder="Enter your password"
-              type={InputType.PASSWORD}
-              form={form}
-            />
-          </FieldGroup>
-          <div className="flex flex-col gap-4">
-            <Button type="submit" className="form-btn" disabled={isLoading}>
-              {isLoading ? (
-                <>
-                  <Loader2 size={20} className="animate-spin">
-                    &nbsp; Loading
-                  </Loader2>
-                </>
-              ) : type === AuthFormType.SIGN_IN ? (
-                "Sign In"
-              ) : (
-                "Sign Up"
-              )}
-            </Button>
-          </div>
-        </form>
-      )}
+          <CustomInputComponent
+            key={CustomInputLabels.EMAIL}
+            label={CustomInputLabels.EMAIL}
+            placeholder="Enter your email"
+            type={InputType.EMAIL}
+            form={form}
+          />
+          <CustomInputComponent
+            key={CustomInputLabels.PASSWORD}
+            label={CustomInputLabels.PASSWORD}
+            placeholder="Enter your password"
+            type={InputType.PASSWORD}
+            form={form}
+          />
+        </FieldGroup>
+        <div className="flex flex-col gap-4">
+          <Button type="submit" className="form-btn" disabled={isLoading}>
+            {isLoading ? (
+              <>
+                <Loader2 size={20} className="animate-spin">
+                  &nbsp; Loading
+                </Loader2>
+              </>
+            ) : type === AuthFormType.SIGN_IN ? (
+              "Sign In"
+            ) : (
+              "Sign Up"
+            )}
+          </Button>
+        </div>
+      </form>
       <footer className="flex justify-center gap-1">
         <p>
           {type === AuthFormType.SIGN_IN
@@ -189,6 +191,7 @@ const AuthForm = ({ type }: AuthFormProps) => {
           {type === AuthFormType.SIGN_IN ? "Sign Up" : "Sign In"}
         </Link>
       </footer>
+      {/* )} */}
     </section>
   )
 }
