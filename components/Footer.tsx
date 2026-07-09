@@ -16,7 +16,7 @@ const Footer = ({ user, type = FooterType.DESKTOP }: FooterProps) => {
           type === FooterType.MOBILE ? "footer_name-mobile" : "footer_name"
         }
       >
-        <p className="text-xl font-bold text-gray-700">{user?.name[0]}</p>
+        <p className="text-xl font-bold text-gray-700">{user?.firstName[0]}</p>
       </div>
       <div
         className={
@@ -24,7 +24,7 @@ const Footer = ({ user, type = FooterType.DESKTOP }: FooterProps) => {
         }
       >
         <h1 className="truncate text-14 font-semibold text-gray-700">
-          {user?.name}
+          {user?.firstName}
         </h1>
         <p className="truncate text-14 font-normal text-gray-600">
           {user?.email}
