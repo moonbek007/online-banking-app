@@ -81,11 +81,12 @@ const AuthForm = ({ type }: AuthFormProps) => {
           </p>
         </div>
       </header>
-      {/* {user ? (
+      {user ? (
         <div className="flex flex-col gap-4">
           <PlaidLink user={user} variant="primary" />
         </div>
-      ) : ( */}
+      ) : (
+        <>
       <form id="form-rhf-input" onSubmit={form.handleSubmit(onSubmit)}>
         <FieldGroup>
           {type === AuthFormType.SIGN_up && (
@@ -191,7 +192,8 @@ const AuthForm = ({ type }: AuthFormProps) => {
           {type === AuthFormType.SIGN_IN ? "Sign Up" : "Sign In"}
         </Link>
       </footer>
-      {/* )} */}
+        </>
+      )}
     </section>
   )
 }
